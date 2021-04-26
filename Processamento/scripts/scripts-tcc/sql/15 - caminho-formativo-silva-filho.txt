@@ -1,0 +1,10 @@
+SELECT CAST((a.ano_letivo__ano || a.periodo_letivo) AS INT) ingresso, 
+       CASE
+          WHEN sm.id IN (971101729, 971101719) THEN 'Formado'
+          WHEN sm.id IN (920915333, 976677973) THEN 'Matriculado'
+          ELSE 'Outros caminhos' 
+        END situacao, count(*)
+FROM Aluno a,
+     SituacaoMatricula sm
+WHERE a.situacao_id = sm.id
+GROUP BY ingresso, situacao;
